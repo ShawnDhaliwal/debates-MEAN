@@ -1,0 +1,64 @@
+<html ng-app>
+	<head>
+	  <title>Debate Now</title>
+	  <meta charset="utf-8">
+	  <meta name="viewport" content="width=device-width, initial-scale=1">
+	  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+	  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.25/angular.min.js"></script>
+	  <link rel="stylesheet" href="public/css/styles.css">
+	</head>
+
+	<body>
+		<!-- Navbar -->
+		<nav class="navbar navbar-default">
+		  <div class="container-fluid">
+		    <div class="navbar-header">
+		      <a class="navbar-brand" href="#">Debate Now</a>
+		    </div>
+		    <ul class="nav navbar-nav">
+		    	<li class="dropdown">
+		       		<a href="#" data-toggle="dropdown" class="dropdown-toggle">Categories <b class="caret"></b></a>
+			    	<ul class="dropdown-menu">
+			    		<li><a href="#">All</a></li>
+			        	<li><a href="#">Politics</a></li>
+			        	<li><a href="#">Sports</a></li>
+			            <li><a href="#">Religion</a></li>
+			    	</ul>
+		      	</li>
+		      <li>
+				<form class="navbar-form navbar-left" role="search">
+				    <div class="form-group">
+				        <input type="text" class="form-control" placeholder="Search Topic">
+				    </div>
+				    <button type="submit" class="btn btn-default"><span class="glyphicon glyphicon-search"></span></button>
+				</form>
+		      </li>
+		    </ul>
+            <ul class="nav navbar-nav navbar-right">
+		      <li><a href="#">Log In</a></li>
+		      <li><a href="#">Sign Up</a></li>
+		    </ul>
+		  </div>
+		</nav>
+		<!-- End Navbar -->
+
+		<div class="topics">
+			<div class="list-group">
+			  <a href="#" class="list-group-item list-group-item-action">
+			    <h2 class="list-group-item-heading">Header</h2>
+			    <button type="button" class="btn btn-default">Comments (#)</button>
+			  </a>
+			  <a href="#" class="list-group-item list-group-item-action">
+			    <h2 class="list-group-item-heading">Header</h2>
+			    <button type="button" class="btn btn-default">Comments (#)</button>
+			  </a>
+			  <a href="#" class="list-group-item list-group-item-action">
+			    <h2 class="list-group-item-heading">Header</h2>
+			    <button type="button" class="btn btn-default">Comments (#)</button>
+			  </a>
+			</div>
+		</div>
+	</body>
+</html>
