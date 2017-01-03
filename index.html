@@ -1,4 +1,4 @@
-<html ng-app>
+<html ng-app="myApp">
 	<head>
 	  <title>Debate Now</title>
 	  <meta charset="utf-8">
@@ -6,11 +6,14 @@
 	  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 	  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 	  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-	  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.25/angular.min.js"></script>
+	  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+	  <script src="app/controllers/custom-controller.js"></script>
+	  <link rel="stylesheet" type="text/css" href="public/css/sweetalert.css"/>
+      <script src = "public/css/sweetalert.min.js"></script>
 	  <link rel="stylesheet" href="public/css/styles.css">
 	</head>
 
-	<body>
+	<body ng-controller="topics-controller">
 		<!-- Navbar -->
 		<nav class="navbar navbar-default">
 		  <div class="container-fluid">
@@ -34,31 +37,192 @@
 				    </div>
 				    <button type="submit" class="btn btn-default"><span class="glyphicon glyphicon-search"></span></button>
 				</form>
+				<span class="nav-buttons">
+					<button data-toggle="modal" data-target="#modalAddtopic" class="btn btn-default">Add Topic</button>
+				</span>
 		      </li>
 		    </ul>
             <ul class="nav navbar-nav navbar-right">
-		      <li><a href="#">Log In</a></li>
-		      <li><a href="#">Sign Up</a></li>
+            	<div class="nav-buttons">
+			  <button class="btn btn-default" data-toggle="modal" data-target="#modalLogin">Log In</button>
+			  <button class="btn btn-default" data-toggle="modal" data-target="#modalSignup">Sign Up</button>
+			  </div>
+			   <div class="modal fade" id="modalAddtopic" role="dialog">
+			    <div class="modal-dialog">
+			    <form class="form-horizontal" ng-submit="addTopic()">
+
+			      <!-- Modal content-->
+			      <div class="modal-content">
+			        <div class="modal-header">
+			          <button type="button" class="close" data-dismiss="modal">&times;</button>
+			          <h4 class="modal-title">New Topic</h4>
+			        </div>
+			        <div class="modal-body">
+				    		<div class="control-group">
+				      		<!-- Username -->
+				      			<label class="control-label"  for="username">Title</label>
+				      			<div class="controls">
+				        			<input type="text" ng-model="topic.title" placeholder="" class="input-xlarge" required>
+				      			</div>
+				    		</div>
+				 
+				    <div class="control-group">
+				      <!-- Password -->
+				      <label class="control-label"  for="catgeory">Category</label>
+				      <div class="controls">
+				        <input type="text" ng-model="topic.category" placeholder="" class="input-xlarge" required>
+				      </div>
+				    </div>
+				 
+				    <div class="control-group">
+				      <!-- Button -->
+				      <div class="controls">
+				        <button class="btn btn-info btn-md" type="submit">Submit</button>
+				      </div>
+				    </div>
+				  {{topic.title}}
+				</form>
+			        </div>
+			        <div class="modal-footer">
+			          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+			        </div>
+			      </div>
+			      
+			    </div>
+			  </div>
+
+			   <div class="modal fade" id="modalLogin" role="dialog">
+			    <div class="modal-dialog">
+			    
+			      <!-- Modal content-->
+			      <div class="modal-content">
+			        <div class="modal-header">
+			          <button type="button" class="close" data-dismiss="modal">&times;</button>
+			          <h4 class="modal-title">Log In</h4>
+			        </div>
+			        <div class="modal-body">
+			          <form class="form-horizontal" role="form" ng-controller="login-controller" ng-submit="login()">
+				  <fieldset>
+				    <div class="control-group">
+				      <!-- Username -->
+				      <label class="control-label"  for="username">Username</label>
+				      <div class="controls">
+				        <input type="text" id="username" name="username_login" ng-model="login.username" placeholder="" class="input-xlarge">
+				      </div>
+				    </div>
+				 
+				    <div class="control-group">
+				      <!-- Password -->
+				      <label class="control-label"  for="password">Password</label>
+				      <div class="controls">
+				        <input type="password" id="password" name="password_login" placeholder="" class="input-xlarge">
+				      </div>
+				    </div>
+				 
+				    <div class="control-group">
+				      <!-- Button -->
+				      <div class="controls">
+				        <button class="btn btn-info btn-md">Submit</button>
+				      </div>
+				    </div>
+				  </fieldset>
+				  {{login}}
+				</form>
+			        </div>
+			        <div class="modal-footer">
+			          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+			        </div>
+			      </div>
+			      
+			    </div>
+			  </div>
+
+			  <!-- Modal -->
+			  <div class="modal fade" id="modalSignup" role="dialog">
+			    <div class="modal-dialog">
+			    
+			      <!-- Modal content-->
+			      <div class="modal-content">
+			        <div class="modal-header">
+			          <button type="button" class="close" data-dismiss="modal">&times;</button>
+			          <h4 class="modal-title">Sign Up</h4>
+			        </div>
+			      <div class="modal-body">
+				<form class="form-horizontal" role="form" ng-controller="signup-controller" ng-submit="signup()">
+				  <fieldset>
+				    <div class="control-group" >
+				      <!-- Username -->
+				      <label class="control-label"  for="username_signup">Username</label>
+				      <div class="controls">
+				        <input type="text" id="username_signup" ng-model="signup.username" name="username_signup" placeholder="" class="input-xlarge">
+				        <p class="help-block">Username can contain any letters or numbers, without spaces</p>
+				      </div>
+				    </div>
+				 
+				    <div class="control-group">
+				      <!-- E-mail -->
+				      <label class="control-label" for="email_signup">E-mail</label>
+				      <div class="controls">
+				        <input type="text" id="email_signup" ng-model="signup.email" name="email_signup" placeholder="" class="input-xlarge">
+				        <p class="help-block">Please provide your E-mail</p>
+				      </div>
+				    </div>
+				 
+				    <div class="control-group">
+				      <!-- Password-->
+				      <label class="control-label" for="password_signup">Password</label>
+				      <div class="controls">
+				        <input type="password" id="password_signup" ng-model="signup.password" name="password_signup" placeholder="" class="input-xlarge">
+				        <p class="help-block">Password should be at least 4 characters</p>
+				      </div>
+				    </div>
+				 
+				    <div class="control-group">
+				      <!-- Password -->
+				      <label class="control-label"  for="password_confirm">Password (Confirm)</label>
+				      <div class="controls">
+				        <input type="password" id="password_confirm" name="password_confirm" placeholder="" class="input-xlarge">
+				        <p class="help-block">Please confirm password</p>
+				      </div>
+				    </div>
+				 
+				    <div class="control-group">
+				      <!-- Button -->
+				      <div class="controls">
+				        <button class="btn btn-info btn-md" id="signup-submit">Submit</button>
+				      </div>
+				    </div>
+				  </fieldset>
+				</form>
+			        </div>
+			        <div class="modal-footer">
+			          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+			        </div>
+			      </div>
+			      
+			    </div>
+			  </div>
 		    </ul>
 		  </div>
 		</nav>
 		<!-- End Navbar -->
-
+		<!-- Topic List -->
 		<div class="topics">
-			<div class="list-group">
-			  <a href="#" class="list-group-item list-group-item-action">
-			    <h2 class="list-group-item-heading">Header</h2>
-			    <button type="button" class="btn btn-default">Comments (#)</button>
-			  </a>
-			  <a href="#" class="list-group-item list-group-item-action">
-			    <h2 class="list-group-item-heading">Header</h2>
-			    <button type="button" class="btn btn-default">Comments (#)</button>
-			  </a>
-			  <a href="#" class="list-group-item list-group-item-action">
-			    <h2 class="list-group-item-heading">Header</h2>
-			    <button type="button" class="btn btn-default">Comments (#)</button>
-			  </a>
-			</div>
+			<div ng-repeat="topic in topics | orderBy: '-score'">
+	  			<div class="list-group">
+				  <a href="#" class="list-group-item list-group-item-action">
+				  	<p class="topic-category">{{topic.category}}</p>
+				    <h2 class="list-group-item-heading">{{topic.title}}</h2>
+				    <span class="score">Score: {{topic.score}}</span>
+				    <div class="comments-button">
+				    	<button type="button" class="btn btn-default">Comments (#)</button>
+				    </div>
+				  </a>
+				  <a href="#" class="vote-yes-button">AGREE</a>			  
+				  <a href="#" class="vote-no-button">DISAGREE</a>
+				</div>
+  			</div>	
 		</div>
+		<!-- End Topic Lists -->
 	</body>
 </html>
