@@ -1,44 +1,33 @@
 var express     = require('express');
 var app         = express();
-var bodyParser  = require('body-parser');
-var morgan      = require('morgan');
-var mongoose    = require('mongoose');
-var passport	= require('passport');
-var config      = require('./config/database'); // get db config file
-var User        = require('./app/models/user'); // get the mongoose model
+var mongojs 	= require('mongojs');
+var db 			= mongojs('debate-now', ['topicslist']);
 var port        = process.env.PORT || 3000;
-var jwt         = require('jwt-simple');
-var path 		= require('path');
+var bodyParser 	= require('body-parser');
+
  
-// get our request parameters
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(bodyParser.json());
- 
-// log to console
-app.use(morgan('dev'));
- 
-// Use the passport package in our application
-app.use(passport.initialize());
- 
+
 //Declare static directory
-app.use("/public",express.static(__dirname + "/public"));
+app.use(express.static(__dirname + "/public"));
 app.use("/app",express.static(__dirname + "/app"));
+app.use(bodyParser.json());
 
-
-// viewed at http://localhost:3000
-app.get('/', function(req, res) {
-    res.sendFile(path.join(__dirname + '/index.html'));
+app.get('/topicslist', function(req,res){
+	console.log("I recieved GET request");
+	db.topicslist.find(function(err,docs){
+		console.log(docs);
+		res.json(docs);
+	});
 });
 
-// connect to database
-mongoose.connect(config.database);
- 
-// pass passport for configuration
-require('./config/passport')(passport);
- 
-// bundle our routes
-var apiRoutes = express.Router();
- 
+app.post('/topicslist', function(req,res){
+	console.log(req.body);
+	db.topicslist.insert(req.body, function(err, doc){
+		res.json(doc);
+	});
+
+});
+
 // Start the server
 app.listen(port);
 console.log('Running on: http://localhost:' + port);

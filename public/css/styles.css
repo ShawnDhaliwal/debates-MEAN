@@ -13,6 +13,11 @@
 
 }
 
+#add-topic-button{
+	color: white;
+	background-color: blue;
+}
+
 .topics .list-group {
 	width: 60%;
 	margin-left: 20%;
