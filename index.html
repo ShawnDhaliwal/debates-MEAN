@@ -49,39 +49,39 @@
 			  </div>
 			   <div class="modal fade" id="modalAddtopic" role="dialog">
 			    <div class="modal-dialog">
-			    <form class="form-horizontal" ng-submit="addTopic()">
+				    <form class="form-horizontal" ng-submit="addTopic()">
 
-			      <!-- Modal content-->
-			      <div class="modal-content">
-			        <div class="modal-header">
-			          <button type="button" class="close" data-dismiss="modal">&times;</button>
-			          <h4 class="modal-title">New Topic</h4>
-			        </div>
-			        <div class="modal-body">
-				    		<div class="control-group">
-				      		<!-- Username -->
-				      			<label class="control-label"  for="username">Title</label>
-				      			<div class="controls">
-				        			<input type="text" ng-model="topic.title" placeholder="" class="input-xlarge" required>
-				      			</div>
-				    		</div>
-				 
-				    <div class="control-group">
-				      <!-- Password -->
-				      <label class="control-label"  for="catgeory">Category</label>
-				      <div class="controls">
-				        <input type="text" ng-model="topic.category" placeholder="" class="input-xlarge" required>
-				      </div>
-				    </div>
-				 
-				    <div class="control-group">
-				      <!-- Button -->
-				      <div class="controls">
-				        <button class="btn btn-info btn-md" type="submit">Submit</button>
-				      </div>
-				    </div>
-				  {{topic.title}}
-				</form>
+				      	<!-- Modal content Add Topic-->
+				    	<div class="modal-content">
+				        <div class="modal-header">
+				          <button type="button" class="close" data-dismiss="modal">&times;</button>
+				          <h4 class="modal-title">New Topic</h4>
+				        </div>
+				        <div class="modal-body">
+					    	<div class="control-group">
+					      		<label class="control-label"  for="username">Title</label>
+					      		<div class="controls">
+					        		<input type="text" ng-model="topic.title" placeholder="" class="input-xlarge" required>
+					      		</div>
+					    	</div>
+						    <div class="control-group">
+						    	<label class="control-label"  for="catgeory">Category</label>
+						    	<div class="controls">
+						    		<select required ng-model="topic.category">
+						    		  	<option value=""></option>
+										<option value="milk">Sports</option>
+										<option value="news">News</option>
+										<option value="science">Science</option>
+										<option value="politics">Politics</option>
+									</select>
+						    	</div>
+						    </div>
+						    <div class="control-group">
+						      <div class="controls">
+						        <button class="btn btn-info btn-md" type="submit">Submit</button>
+						      </div>
+						    </div>
+					</form>
 			        </div>
 			        <div class="modal-footer">
 			          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -207,22 +207,30 @@
 		</nav>
 		<!-- End Navbar -->
 		<!-- Topic List -->
+		<dic class="topic-background">
 		<div class="topics">
 			<div ng-repeat="topic in topics | orderBy: '-score'">
 	  			<div class="list-group">
-				  <a href="#" class="list-group-item list-group-item-action">
+				  <div class="list-group-item list-group-item-action">
 				  	<p class="topic-category">{{topic.category}}</p>
 				    <h2 class="list-group-item-heading">{{topic.title}}</h2>
-				    <span class="score">Score: {{topic.score}}</span>
-				    <div class="comments-button">
-				    	<button type="button" class="btn btn-default">Comments (#)</button>
-				    </div>
-				  </a>
-				  <a href="#" class="vote-yes-button">AGREE</a>			  
-				  <a href="#" class="vote-no-button">DISAGREE</a>
+				  </div>
+				  <span class = "agree-button">
+					  <button type="button" class="btn btn-default" ng-click="incrementAgree(topic)">AGREE</button>
+				  </span>
+				  <span class= "disagree-button">
+					  <button type="button" class="btn btn-default" ng-click="incrementDisagree(topic)">DISAGREE</button>
+				  </span>
+				  <span class="view-button-score">
+				  	<button type="button" class="btn btn-default">View Topic</button>
+				  	<span class="score-pos" ng-show="topic.score > 0">+ {{topic.score}}</span>
+				  	<span class="score-neu" ng-show="topic.score == 0"> {{topic.score}}</span>
+				  	<span class="score-neg" ng-show="topic.score < 0"> {{topic.score}}</span>
+				  </span>
 				</div>
   			</div>	
 		</div>
+		</dic>
 		<!-- End Topic Lists -->
 	</body>
 </html>
