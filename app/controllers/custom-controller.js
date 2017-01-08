@@ -24,12 +24,22 @@ app.controller('topics-controller', function($scope, $http) {
 	  swal("Topic Created","","success");
 	  refresh();
 	};
-	$scope.incrementAgree = function(topic) {
-  		topic.score += 1;
-  		topic.agree += 1;
+	$scope.incrementAgree = function(id) {
+  		$http.get('/topicslist/agree/'+id).success(function(response){
+  			var topic = response;
+  			console.log(topic.title);
+  			$http.put('/topicslist/agree/'+id, topic).success(function(response){
+  				refresh();
+  			});
+		});
 	};
-	$scope.incrementDisagree = function(topic) {
-  		topic.score -= 1;
-  		topic.disagree += 1;
+	$scope.incrementDisagree = function(id) {
+  		$http.get('/topicslist/disagree/'+id).success(function(response){
+  			var topic = response;
+  			console.log(topic.title);
+  			$http.put('/topicslist/disagree/'+id, topic).success(function(response){
+  				refresh();
+  			});
+		});
 	};
 });
