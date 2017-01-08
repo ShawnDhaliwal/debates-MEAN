@@ -19,11 +19,18 @@ app.get('/topicslist', function(req,res){
 	});
 });
 
-app.post('/topicslist', function(req,res){
-	db.topicslist.insert(req.body, function(err, doc){
-		res.json(doc);
+app.post('/topicslist/add', function(req,res){
+	console.log(req.body.title);
+	var title = req.body.title;
+	db.topicslist.findOne({title: title},function(err,docs){
+		if(docs){
+			res.json('already_exists');
+		}else{
+			db.topicslist.insert(req.body, function(err, doc){
+				res.json(docs);
+			});
+		}
 	});
-
 });
 
 app.get('/topicslist/agree/:id', function(req,res){
@@ -70,6 +77,5 @@ app.put('/topicslist/disagree/:id', function(req,res){
 });
 
 
-// Start the server
 app.listen(port);
 console.log('Running on: http://localhost:' + port);
