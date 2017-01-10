@@ -13,29 +13,28 @@ app.use("/app",express.static(__dirname + "/app"));
 app.use(bodyParser.json());
 
 app.get('/topicslist', function(req,res){
-	console.log("I recieved GET request");
 	db.topicslist.find(function(err,docs){
 		res.json(docs);
 	});
 });
 
 app.post('/topicslist/add', function(req,res){
-	console.log(req.body.title);
 	var title = req.body.title;
 	db.topicslist.findOne({title: title},function(err,docs){
 		if(docs){
 			res.json('already_exists');
 		}else{
 			db.topicslist.insert(req.body, function(err, doc){
-				res.json(docs);
+				res.json(doc);
 			});
 		}
 	});
 });
 
+
+
 app.get('/topicslist/agree/:id', function(req,res){
 	var id = req.params.id;
-	console.log("I recieved agree GET request");
 	db.topicslist.findOne({_id: mongojs.ObjectId(id)},function(err,docs){
 		res.json(docs);
 	});
@@ -57,7 +56,6 @@ app.put('/topicslist/agree/:id', function(req,res){
 
 app.get('/topicslist/disagree/:id', function(req,res){
 	var id = req.params.id;
-	console.log("I recieved disagree GET request");
 	db.topicslist.findOne({_id: mongojs.ObjectId(id)},function(err,docs){
 		res.json(docs);
 	});
@@ -75,6 +73,23 @@ app.put('/topicslist/disagree/:id', function(req,res){
 		});
 	
 });
+
+
+app.get('/viewtopic/:id', function(req,res){
+	var id = req.params.id;
+
+	db.topicslist.findOne({_id: mongojs.ObjectId(id)},function(err,docs){
+		if(docs){
+
+			res.json(docs);
+		} else {
+			res.json("404");
+		}
+
+	});
+	
+});
+
 
 
 app.listen(port);

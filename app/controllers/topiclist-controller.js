@@ -1,19 +1,14 @@
-var app = angular.module('myApp', []);
+app.controller('topics-controller', function($scope, $http, $route, $routeParams, $location) {
 
-app.controller('signup-controller', function($scope) {
-});
 
-app.controller('login-controller', function($scope) {
-});
-
-app.controller('topics-controller', function($scope, $http) {
 	var refresh = function() {
 		$http.get('/topicslist').success(function(response){
 			$scope.topics = response;
 		});
-	};
-	refresh();
 
+	};
+
+	refresh();
 	$scope.addTopic = function(){	
 	  var topics = {title: $scope.topic.title, score: 0, agree: 0, disagree: 0, category: $scope.topic.category};
 	  $http.post('/topicslist/add', topics).success(function(response){
@@ -21,9 +16,11 @@ app.controller('topics-controller', function($scope, $http) {
 	  		swal("Topic Already Exists!","","error");
 	  	} else{
 	  		swal("Topic Created","","success");
-	  		refresh();
+	  		$route.reload();
+	  		$location.path('/topic/'+$scope.topic.title+'/'+response._id);
 	  	}
 	  });
+
 	};
 	$scope.incrementAgree = function(id) {
   		$http.get('/topicslist/agree/'+id).success(function(response){
@@ -41,4 +38,5 @@ app.controller('topics-controller', function($scope, $http) {
   			});
 		});
 	};
+
 });

@@ -7,7 +7,14 @@
 	  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 	  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 	  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
-	  <script src="../app/controllers/custom-controller.js"></script>
+	  	  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-route.js"></script>
+
+
+	  <script src="../app/controllers/app.js"></script>
+	  <script src="../app/controllers/topiclist-controller.js"></script>
+	  <script src="../app/controllers/viewtopic-controller.js"></script>
+
+
 	  <link rel="stylesheet" type="text/css" href="css/sweetalert.css"/>
       <script src = "css/sweetalert.min.js"></script>
 	  <link rel="stylesheet" href="css/styles.css">
@@ -101,7 +108,7 @@
 			          <h4 class="modal-title">Log In</h4>
 			        </div>
 			        <div class="modal-body">
-			          <form class="form-horizontal" role="form" ng-controller="login-controller" ng-submit="login()">
+			          <form class="form-horizontal" role="form" ng-submit="login()">
 				  <fieldset>
 				    <div class="control-group">
 				      <!-- Username -->
@@ -147,7 +154,7 @@
 			          <h4 class="modal-title">Sign Up</h4>
 			        </div>
 			      <div class="modal-body">
-				<form class="form-horizontal" role="form" ng-controller="signup-controller" ng-submit="signup()">
+				<form class="form-horizontal" role="form"  ng-submit="signup()">
 				  <fieldset>
 				    <div class="control-group" >
 				      <!-- Username -->
@@ -204,33 +211,8 @@
 		    </ul>
 		  </div>
 		</nav>
-		<!-- End Navbar -->
-		<!-- Topic List -->
-		<dic class="topic-background">
-		<div class="topics">
-			<div ng-repeat="topic in topics | orderBy: '-score'">
-	  			<div class="list-group">
-				  <div class="list-group-item list-group-item-action">
-				  	<p class="topic-category">{{topic.category}}</p>
-				  	<p class="date-created"> January 4th, 2017 </p>
-				    <h2 class="list-group-item-heading">{{topic.title}}</h2>
-				  </div>
-				  <span class = "agree-button">
-					  <button type="button" class="btn btn-default" ng-click="incrementAgree(topic._id)">AGREE</button>
-				  </span>
-				  <span class= "disagree-button">
-					  <button type="button" class="btn btn-default" ng-click="incrementDisagree(topic._id)">DISAGREE</button>
-				  </span>
-				  <span class="view-button-score">
-				  	<button type="button" class="btn btn-default">View Topic</button>
-				  	<span class="score-pos" ng-if="topic.score > 0">+ {{topic.score}} agree: {{topic.agree}} disagree: {{topic.disagree}}</span>
-				  	<span class="score-neu" ng-if="topic.score == 0">+ {{topic.score}} agree: {{topic.agree}} disagree: {{topic.disagree}}</span>
-				  	<span class="score-neg" ng-if="topic.score < 0"> {{topic.score}}</span>
-				  </span>
-				</div>
-  			</div>	
-		</div>
-		</dic>
-		<!-- End Topic Lists -->
+		<div ng-view></div>
 	</body>
 </html>
+
+
