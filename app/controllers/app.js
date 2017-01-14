@@ -2,13 +2,17 @@ var app = angular.module('myApp', ['ngRoute']);
 app.config(function($routeProvider) {
     $routeProvider
 
-    .when("/topic/:title/:id", {
+    .when("/:id", {
         templateUrl : "viewtopic.html", controller: 'viewtopic-controller'
     })
-    .otherwise({
+    .when("/", {
         templateUrl : "topiclist.html", controller: 'topics-controller'
+    })    
+    .otherwise({
+       templateUrl : "404.html"
     });
 });
+
 
 
 

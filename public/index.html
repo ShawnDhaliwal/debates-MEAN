@@ -7,7 +7,7 @@
 	  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 	  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 	  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
-	  	  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-route.js"></script>
+	  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-route.js"></script>
 
 
 	  <script src="../app/controllers/app.js"></script>
@@ -25,16 +25,16 @@
 		<nav class="navbar navbar-default">
 		  <div class="container-fluid">
 		    <div class="navbar-header">
-		      <a class="navbar-brand" href="#">Debate Now</a>
+		      <a class="navbar-brand" href="#/">Debate Now</a>
 		    </div>
 		    <ul class="nav navbar-nav">
 		    	<li class="dropdown">
-		       		<a href="#" data-toggle="dropdown" class="dropdown-toggle">Categories <b class="caret"></b></a>
+		       		<a data-toggle="dropdown" class="dropdown-toggle">Categories <b class="caret"></b></a>
 			    	<ul class="dropdown-menu">
-			    		<li><a href="#">All</a></li>
-			        	<li><a href="#">Politics</a></li>
-			        	<li><a href="#">Sports</a></li>
-			            <li><a href="#">Religion</a></li>
+			    		<li><a>All</a></li>
+			        	<li><a>Politics</a></li>
+			        	<li><a>Sports</a></li>
+			            <li><a>Religion</a></li>
 			    	</ul>
 		      	</li>
 		      <li>
@@ -45,18 +45,18 @@
 				    <button type="submit" class="btn btn-default"><span class="glyphicon glyphicon-search"></span></button>
 				</form>
 				<span class="nav-buttons">
-					<button data-toggle="modal" data-target="#modalAddtopic" class="btn btn-default" id="add-topic-button">Add Topic</button>
+					<button data-toggle="modal" data-target="#modalAddtopic" class="btn btn-info btn-md">Add Topic</button>
 				</span>
 		      </li>
 		    </ul>
             <ul class="nav navbar-nav navbar-right">
             	<div class="nav-buttons">
-			  <button class="btn btn-default" data-toggle="modal" data-target="#modalLogin">Log In</button>
-			  <button class="btn btn-default" data-toggle="modal" data-target="#modalSignup">Sign Up</button>
+			  <button class="btn btn-info btn-md" data-toggle="modal" data-target="#modalLogin">Log In</button>
+			  <button class="btn btn-info btn-md" data-toggle="modal" data-target="#modalSignup">Sign Up</button>
 			  </div>
 			   <div class="modal fade" id="modalAddtopic" role="dialog">
 			    <div class="modal-dialog">
-				    <form class="form-horizontal">
+				    <form name="addTopicForm" class="form-horizontal">
 
 				      	<!-- Modal content Add Topic-->
 				    	<div class="modal-content">
@@ -68,24 +68,24 @@
 					    	<div class="control-group">
 					      		<label class="control-label"  for="username">Title</label>
 					      		<div class="controls">
-					        		<input type="text" ng-model="topic.title" placeholder="" class="input-xlarge" required>
+					        		<input ng-required="true" type="text" ng-model="topic.title" placeholder="" class="input-xlarge">
 					      		</div>
 					    	</div>
 						    <div class="control-group">
 						    	<label class="control-label"  for="catgeory">Category</label>
 						    	<div class="controls">
-						    		<select required ng-model="topic.category">
+						    		<select ng-required="true" ng-model="topic.category">
 						    		  	<option value=""></option>
-										<option value="sports">Sports</option>
-										<option value="news">News</option>
-										<option value="science">Science</option>
-										<option value="politics">Politics</option>
+										<option value="Sports">Sports</option>
+										<option value="News">News</option>
+										<option value="Science">Science</option>
+										<option value="Politics">Politics</option>
 									</select>
 						    	</div>
 						    </div>
 						    <div class="control-group">
 						      <div class="controls">
-						        <button class="btn btn-info btn-md" type="submit" ng-click="addTopic()">Submit</button>
+						        <button ng-disabled="addTopicForm.$invalid" class="btn btn-info btn-md" type="submit" ng-click="addTopic()" data-dismiss="modal">Submit</button>
 						      </div>
 						    </div>
 					</form>
@@ -214,5 +214,4 @@
 		<div ng-view></div>
 	</body>
 </html>
-
 

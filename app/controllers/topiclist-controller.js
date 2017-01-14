@@ -1,6 +1,5 @@
 app.controller('topics-controller', function($scope, $http, $route, $routeParams, $location) {
 
-
 	var refresh = function() {
 		$http.get('/topicslist').success(function(response){
 			$scope.topics = response;
@@ -10,14 +9,13 @@ app.controller('topics-controller', function($scope, $http, $route, $routeParams
 
 	refresh();
 	$scope.addTopic = function(){	
-	  var topics = {title: $scope.topic.title, score: 0, agree: 0, disagree: 0, category: $scope.topic.category};
+	  var topics = {title: $scope.topic.title, score: 0, agree: 0, disagree: 0, category: $scope.topic.category, date: $scope.date = new Date()};
 	  $http.post('/topicslist/add', topics).success(function(response){
 	  	if (response == 'already_exists'){
 	  		swal("Topic Already Exists!","","error");
 	  	} else{
-	  		swal("Topic Created","","success");
-	  		$route.reload();
 	  		$location.path('/topic/'+$scope.topic.title+'/'+response._id);
+	  		refresh();
 	  	}
 	  });
 

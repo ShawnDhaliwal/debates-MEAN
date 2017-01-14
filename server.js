@@ -77,16 +77,19 @@ app.put('/topicslist/disagree/:id', function(req,res){
 
 app.get('/viewtopic/:id', function(req,res){
 	var id = req.params.id;
+	if(id.length == 24){
 
 	db.topicslist.findOne({_id: mongojs.ObjectId(id)},function(err,docs){
-		if(docs){
+			if(err){
 
+			} else {
 			res.json(docs);
-		} else {
-			res.json("404");
-		}
+			}
 
 	});
+	} else {
+		res.json("404");
+	}
 	
 });
 

@@ -1,10 +1,13 @@
 <div class="topics" ng-controller="viewtopic-controller">
-	
-
-	<p>Topic id: {{topicData._id}}</p>
-	<p>Topic Title: {{topicData.title}}</p>
-	<p>Total Agree: {{topicData.agree}}</p>
-	<p>Total Disagree: {{topicData.disagree}}</p>
-	<p>Overall Score: {{topicData.score}}</p>
-
+	<div ng-if="topicData == '404'">
+		<h1>ERROR 404: TOPIC DOES NOT EXIST</h1>
+	</div>
+	<div ng-if="topicData != '404'">
+		<p>Topic id: {{topicData._id}}</p>
+		<p>Topic Title: {{topicData.title}}</p>
+		<p>Total Agree: {{topicData.agree}}</p>
+		<p>Total Disagree: {{topicData.disagree}}</p>
+		<p>Overall Score: {{topicData.score}}</p>
+		<p>Date: {{topicData.date | date:'yyyy-MM-dd'}}</p>
+	</div>
 </div>
