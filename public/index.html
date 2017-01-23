@@ -1,6 +1,6 @@
 <html ng-app="myApp">
 <head>
-	<title>Debate Now</title>
+	<title >Debate Now</title>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -17,7 +17,7 @@
 	<script src = "css/sweetalert.min.js"></script>
 
 	<link rel="stylesheet" href="css/styles.css">
-
+	<link rel="stylesheet" href="css/arrows.css">
 
 </head>
 
@@ -26,31 +26,32 @@
 	<nav class="navbar navbar-default">
 		<div class="container-fluid">
 			<div class="navbar-header">
-				<a class="navbar-brand" href="#/">Debate Now</a>
+				<a class="navbar-brand" href="#/" onClick="window.location.reload()">Debate Now</a>
 			</div>
 			<ul class="nav navbar-nav">
-				<li class="dropdown">
-					<a data-toggle="dropdown" class="dropdown-toggle">Categories <b class="caret"></b></a>
-					<ul class="dropdown-menu">
-						<li><a>All</a></li>
-						<li><a>Politics</a></li>
-						<li><a>Sports</a></li>
-						<li><a>Religion</a></li>
-					</ul>
+				<li>
+					<select class="form-control" ng-model="filterCategory" id="nav-dropdowns">
+						<optgroup label="Category">
+							<option value="">All</option>
+							<option value="Sports">Sports</option>
+							<option value="News">News</option>
+							<option value="Science">Science</option>
+							<option value="Politics">Politics</option>
+						</optgroup>
+					</select>
 				</li>
-				<li class="dropdown">
-					<a data-toggle="dropdown" class="dropdown-toggle">Sort By<b class="caret"></b></a>
-					<ul class="dropdown-menu">
-						<li><a>Most Viewed</a></li>
-						<li><a>Most Agreed</a></li>
-						<li><a>Most Disagreed</a></li>
-						<li><a>Most Comments</a></li>
-					</ul>
+				<li>
+					<select class="form-control" ng-model="sortBy" id="nav-dropdowns">
+						<optgroup label="Sort By">
+							<option value="">Most Agreed</option>
+							<option value="-disagree">Most Disagreed</option>
+						</optgroup>
+					</select>
 				</li>
 				<li>
 					<form class="navbar-form navbar-left" role="search">
 						<div class="form-group">
-							<input type="search" ng-model="search" aria-label="search topics" class="form-control" placeholder="Search Topic">
+							<input type="text" ng-model="search" aria-label="search topics" class="form-control" placeholder="Search Topic">
 						</div>
 					</form>
 					<span class="nav-buttons">

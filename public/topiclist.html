@@ -1,5 +1,5 @@
 <div class="topics" ng-controller="topics-controller" >
-	<div ng-repeat="topic in topics | orderBy: '-score' " ng-if="$index > firstIndex-1 && $index < lastIndex-1">
+	<div ng-repeat="topic in topics | orderBy: '-score' | orderBy:sortBy | filter:filterCategory as filtered " ng-if="$index > firstIndex-1 && $index < lastIndex-1">
 		<div class="list-group">
 			<div class="list-group-item list-group-item-action">
 				<p class="topic-category">{{topic.category}}</p>
@@ -14,15 +14,17 @@
 			</span>
 			<span class="view-button-score">
 				<a href="#/{{topic._id}}" class="btn btn-info btn-md"  >View Topic</a>
-				  	<!--<span class="score-pos" ng-if="topic.score > 0">+ {{topic.score}} agree: {{topic.agree}} disagree: {{topic.disagree}}</span>
+				  	<span class="score-pos" ng-if="topic.score > 0">+ {{topic.score}} agree: {{topic.agree}} disagree: {{topic.disagree}}</span>
 				  	<span class="score-neu" ng-if="topic.score == 0">+ {{topic.score}} agree: {{topic.agree}} disagree: {{topic.disagree}}</span>
-				  	<span class="score-neg" ng-if="topic.score < 0"> {{topic.score}}</span>-->
+				  	<span class="score-neg" ng-if="topic.score < 0"> {{topic.score}}</span>
 			</span>	
 		</div>
 	</div>
-	<div class="load-more-div">
-		<a ng-href = "/#/pages/{{prevPage}}" ng-if="prevPage > 0" ng-click = "reloadPage()">Previous</a>
-		<a ng-href = "/#/pages/{{nextPage}}" ng-if="nextPage < nextPageLimit+1" ng-click = "reloadPage()">Next</a>
-	</div>
+	<span class="prevButton">
+		<a ng-href = "/#/pages/{{prevPage}}" ng-if="prevPage > 0" ng-click = "reloadPage()" id="prev">Previous</a>
+	</span>
+	<span class="nextButton">
+		<a ng-href = "/#/pages/{{nextPage}}" ng-if="(nextPage < filtered.length+1) && nextPage*10 < filtered.length+10" ng-click = "reloadPage()" id="next">Next</a>
+	</span>
 </div>
 

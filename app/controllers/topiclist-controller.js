@@ -1,5 +1,6 @@
 app.controller('topics-controller', function($scope, $http, $route, $routeParams, $location, $anchorScroll) {
 
+
 	var refresh = function() {
 		if(!$routeParams.pageNumber){
 			$scope.nextPage = 2;
@@ -19,6 +20,8 @@ app.controller('topics-controller', function($scope, $http, $route, $routeParams
 		}
 		$http.get('/topicslist').success(function(response){
 			$scope.topics = response;
+			$scope.availableSearchParams = $scope.topics;
+
 			$scope.totalTopics = $scope.topics.length;
 			console.log($scope.totalTopics);
 			$scope.nextPageLimit = Math.ceil($scope.totalTopics/10);
