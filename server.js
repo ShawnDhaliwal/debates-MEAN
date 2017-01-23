@@ -5,7 +5,7 @@ var db 			= mongojs('debate-now', ['topicslist']);
 var port        = process.env.PORT || 3000;
 var bodyParser 	= require('body-parser');
 
- 
+
 
 //Declare static directory
 app.use(express.static(__dirname + "/public"));
@@ -79,14 +79,14 @@ app.get('/viewtopic/:id', function(req,res){
 	var id = req.params.id;
 	if(id.length == 24){
 
-	db.topicslist.findOne({_id: mongojs.ObjectId(id)},function(err,docs){
+		db.topicslist.findOne({_id: mongojs.ObjectId(id)},function(err,docs){
 			if(err){
 
 			} else {
-			res.json(docs);
+				res.json(docs);
 			}
 
-	});
+		});
 	} else {
 		res.json("404");
 	}
